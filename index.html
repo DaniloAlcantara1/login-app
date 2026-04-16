@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container" id="loginPage">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <button type="submit" id="submitBtn">Enviar</button>
+      <div id="message" class="message"></div>
+    </form>
+  </div>
+
+  <!-- Home fake -->
+  <div class="home-container" id="homePage" style="display:none;">
+    <h2>Bem-vindo à Home Fake</h2>
+    <p>Você está logado com sucesso!</p>
+    <p>Esta é apenas uma interface mínima para simular navegação após login.</p>
+    <button id="logoutBtn">Sair</button>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+    const loginPage = document.getElementById('loginPage');
+    const homePage = document.getElementById('homePage');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username && password) {
+        // Mostra home fake
+        loginPage.style.display = "none";
+        homePage.style.display = "block";
+      } else if (!username && !password) {
+        messageDiv.textContent = "Erro: Usuário e senha não preenchidos!";
+        messageDiv.className = "message error";
+      } else if (!username) {
+        messageDiv.textContent = "Erro: Usuário não preenchido!";
+        messageDiv.className = "message error";
+      } else {
+        messageDiv.textContent = "Erro: Senha não preenchida!";
+        messageDiv.className = "message error";
+      }
+    });
+
+    logoutBtn.addEventListener('click', function() {
+      homePage.style.display = "none";
+      loginPage.style.display = "block";
+      form.reset();
+      messageDiv.textContent = "";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  formulario:
+    build: .
+    container_name: formulario-login
+    ports:
+      - "8080:80"
+    restart: always
